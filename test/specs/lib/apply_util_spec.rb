@@ -29,7 +29,7 @@ describe SchemaEvolutionManager::ApplyUtil do
       begin
         util.apply!('./scripts')
         fail("No exception thrown when applying invalid script")
-      rescue Exception => e
+      rescue SchemaEvolutionManager::ScriptError => e
       end
       db.psql_command("select count(*) from schema_evolution_manager.scripts").to_i.should == 0
     end
@@ -43,7 +43,7 @@ describe SchemaEvolutionManager::ApplyUtil do
       begin
         util.apply!('./scripts')
         fail("No exception thrown when applying invalid script")
-      rescue Exception => e
+      rescue SchemaEvolutionManager::ScriptError => e
       end
       db.psql_command("select count(*) from tmp").to_i.should == 0
     end

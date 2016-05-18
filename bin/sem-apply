@@ -41,5 +41,12 @@ rescue SchemaEvolutionManager::ScriptError => e
   puts "If this script has previously been applied to this database, you can record it as having been applied by:"
   puts "  " + e.dml
   puts ""
+  puts "Script output:"
+  if e.error.output.strip.empty?
+    puts "  None captured"
+  else
+    puts e.error.output.strip
+  end
+  puts ""
   exit(1)
 end

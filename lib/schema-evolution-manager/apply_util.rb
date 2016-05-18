@@ -45,11 +45,8 @@ module SchemaEvolutionManager
       have_error = true
       begin
         @db.psql_file(path)
-        have_error = false
-      ensure
-        if have_error
-          raise ScriptError.new(@db, filename)
-        end
+      rescue SchemaEvolutionManager::CommandError => e
+        puts e.output
       end
 
       @scripts.record_as_run!(filename)

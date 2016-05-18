@@ -1,4 +1,5 @@
 module SchemaEvolutionManager
+
   class Library
 
     unless defined?(TMPFILE_DIR)
@@ -126,16 +127,13 @@ module SchemaEvolutionManager
         puts command
       end
 
-      begin
-        result = `#{command}`.strip
-        status = $?
-        if status.to_i > 0
-          raise "Non zero exit code[%s] running command[%s]" % [status, command]
-        end
-      rescue Exception => e
-        raise "Error running command[%s]: %s" % [command, e.to_s]
+      result = `#{command}`.strip
+      status = $?
+      if status.to_i == 0
+        result
+      else
+        raise CommandError.new(command, status.to_i, result)
       end
-      result
     end
 
     def Library.normalize_path(path)
