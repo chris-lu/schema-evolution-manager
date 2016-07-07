@@ -48,15 +48,7 @@ module SchemaEvolutionManager
       if echo
         STDIN.gets
       else
-        settings = `stty -g`.strip
-        begin
-          `stty -echo`
-          input = STDIN.gets
-          puts ""
-        ensure
-          `stty #{settings}`
-        end
-        input
+        input = STDIN.noecho(&:gets)
       end
     end
 
