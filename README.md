@@ -107,7 +107,7 @@ First presented at [PGDay NYC 2013](https://speakerdeck.com/mbryzek/schema-evolu
 
 ## Dependencies
 
-- Ruby: Current testing against ruby 2.x. 1.8 and 1.9 are supported.
+- Ruby: Current testing against ruby 2.x. and >1.9.3 are supported.
 
 - Postgres: Only tested against 9.x. We minimize use of advanced
   features and should work against 8.x series. If you try 8.x and
@@ -127,13 +127,19 @@ There are two ways to install schema evolution manager:
 
         git clone git://github.com/mbryzek/schema-evolution-manager.git
         cd schema-evolution-manager
-        git checkout 0.9.32
+        git checkout 0.9.32-cdri
         ruby ./configure.rb
         sudo ./install.rb
 
 2. If you have ruby gems:
 
         gem install schema-evolution-manager
+
+
+3. Compiling to a gem and install :
+
+        gem build schema-evolution-manager.gemspec
+        gem install schema-evolution-manager-0.9.32.pre.cdri.gem
 
 ## Upgrading
 

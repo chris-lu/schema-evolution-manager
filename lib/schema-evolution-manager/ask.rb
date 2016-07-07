@@ -1,5 +1,7 @@
 module SchemaEvolutionManager
 
+  require 'io/console'
+
   # Simple library to ask user for input, with easy mocakability for
   # testing
   class Ask
@@ -48,15 +50,7 @@ module SchemaEvolutionManager
       if echo
         STDIN.gets
       else
-        settings = `stty -g`.strip
-        begin
-          `stty -echo`
-          input = STDIN.gets
-          puts ""
-        ensure
-          `stty #{settings}`
-        end
-        input
+        input = STDIN.noecho(&:gets).chomp 
       end
     end
 
